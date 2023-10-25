@@ -35,6 +35,15 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""speedscale"",
+                    ""type"": ""Button"",
+                    ""id"": ""f3712b28-0437-45d8-8295-2c7e3465dc93"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -50,8 +59,8 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""60b3b121-09ac-4a61-a16e-78a06b0e6757"",
+                    ""name"": ""left"",
+                    ""id"": ""bde6eb9d-0562-4807-b624-bf66cf2bf780"",
                     ""path"": ""<Keyboard>/#(W)"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -61,35 +70,35 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""down"",
-                    ""id"": ""f0f248c7-f44a-46a7-926f-f01ef062f53c"",
-                    ""path"": ""<Keyboard>/#(A)"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""8cfe1a41-f7ad-4893-b3a0-c4988636c875"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""move"",
+                    ""action"": ""speedscale"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""6adfac51-f156-42e7-8a23-6755f9f1de8b"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""speedscale"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""left"",
-                    ""id"": ""bde6eb9d-0562-4807-b624-bf66cf2bf780"",
-                    ""path"": ""<Keyboard>/#(S)"",
+                    ""name"": ""positive"",
+                    ""id"": ""e6bc0c59-197b-42f6-9166-42dac3164bca"",
+                    ""path"": ""<Mouse>/scroll/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""4af49fd3-9677-4950-9ebf-6f67dbed6ff3"",
-                    ""path"": ""<Keyboard>/#(D)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""move"",
+                    ""action"": ""speedscale"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -118,6 +127,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         // InGame
         m_InGame = asset.FindActionMap("InGame", throwIfNotFound: true);
         m_InGame_move = m_InGame.FindAction("move", throwIfNotFound: true);
+        m_InGame_speedscale = m_InGame.FindAction("speedscale", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -180,11 +190,13 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_InGame;
     private List<IInGameActions> m_InGameActionsCallbackInterfaces = new List<IInGameActions>();
     private readonly InputAction m_InGame_move;
+    private readonly InputAction m_InGame_speedscale;
     public struct InGameActions
     {
         private @ControlMap m_Wrapper;
         public InGameActions(@ControlMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @move => m_Wrapper.m_InGame_move;
+        public InputAction @speedscale => m_Wrapper.m_InGame_speedscale;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -197,6 +209,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @move.started += instance.OnMove;
             @move.performed += instance.OnMove;
             @move.canceled += instance.OnMove;
+            @speedscale.started += instance.OnSpeedscale;
+            @speedscale.performed += instance.OnSpeedscale;
+            @speedscale.canceled += instance.OnSpeedscale;
         }
 
         private void UnregisterCallbacks(IInGameActions instance)
@@ -204,6 +219,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @move.started -= instance.OnMove;
             @move.performed -= instance.OnMove;
             @move.canceled -= instance.OnMove;
+            @speedscale.started -= instance.OnSpeedscale;
+            @speedscale.performed -= instance.OnSpeedscale;
+            @speedscale.canceled -= instance.OnSpeedscale;
         }
 
         public void RemoveCallbacks(IInGameActions instance)
@@ -233,5 +251,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     public interface IInGameActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnSpeedscale(InputAction.CallbackContext context);
     }
 }

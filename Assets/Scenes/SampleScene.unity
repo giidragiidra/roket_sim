@@ -613,6 +613,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensX: 800
   sensY: 800
+  startRotx: 0
+  startRoty: 0
+  startRotz: 0
 --- !u!54 &1195708532
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -621,8 +624,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195708528}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 1000
+  m_Drag: 5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -635,7 +638,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -652,7 +655,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5128a1e6d813d3244a0aacf537d33869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
+  _moveSpeed: 0
+  _speedChangeModifier: 10
+  _maxChangeValue: 200
 --- !u!1 &1506983838
 GameObject:
   m_ObjectHideFlags: 0

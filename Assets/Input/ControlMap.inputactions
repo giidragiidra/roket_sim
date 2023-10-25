@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "speedscale",
+                    "type": "Button",
+                    "id": "f3712b28-0437-45d8-8295-2c7e3465dc93",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -28,8 +37,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "60b3b121-09ac-4a61-a16e-78a06b0e6757",
+                    "name": "left",
+                    "id": "bde6eb9d-0562-4807-b624-bf66cf2bf780",
                     "path": "<Keyboard>/#(W)",
                     "interactions": "",
                     "processors": "",
@@ -39,35 +48,35 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
-                    "id": "f0f248c7-f44a-46a7-926f-f01ef062f53c",
-                    "path": "<Keyboard>/#(A)",
+                    "name": "1D Axis",
+                    "id": "8cfe1a41-f7ad-4893-b3a0-c4988636c875",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "move",
+                    "action": "speedscale",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "6adfac51-f156-42e7-8a23-6755f9f1de8b",
+                    "path": "<Mouse>/scroll/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "speedscale",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
-                    "id": "bde6eb9d-0562-4807-b624-bf66cf2bf780",
-                    "path": "<Keyboard>/#(S)",
+                    "name": "positive",
+                    "id": "e6bc0c59-197b-42f6-9166-42dac3164bca",
+                    "path": "<Mouse>/scroll/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "4af49fd3-9677-4950-9ebf-6f67dbed6ff3",
-                    "path": "<Keyboard>/#(D)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "move",
+                    "action": "speedscale",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

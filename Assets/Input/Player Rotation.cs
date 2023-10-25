@@ -6,6 +6,10 @@ public class CameraRotarion : MonoBehaviour
 {
     [SerializeField] private float sensX = 1;
     [SerializeField] private float sensY = 1;
+    
+    [SerializeField] private float startRotx;
+    [SerializeField] private float startRoty;
+    [SerializeField] private float startRotz;
 
     private float xRotation;
     private float zRotation;
@@ -14,8 +18,8 @@ public class CameraRotarion : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        xRotation = 0;
-        zRotation = 0;
+        xRotation = startRotx;
+        zRotation = startRotz;
     }
 
 
