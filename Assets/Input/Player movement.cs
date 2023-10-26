@@ -36,14 +36,15 @@ public class Playermovement : MonoBehaviour
     }
     private void GetInput()
     {
-        var inputVector = _controls.InGame.move.ReadValue<Vector2>();
+        var inputVector = Vector2.left * _controls.InGame.move.ReadValue<float>();
+        
         _moveVector = transform.forward * inputVector.y + transform.right * inputVector.x;
     }
     private void MovePlayer()
     {
         _rb.AddForce(_moveVector.normalized * _moveSpeed * 10f, ForceMode.Force);
     }
-    private Single SpeedChangeLimiter(Single speed)
+    private float SpeedChangeLimiter(Single speed)
     {
         if (speed > _speedChangeModifier)
             return speed = _speedChangeModifier;
@@ -51,7 +52,7 @@ public class Playermovement : MonoBehaviour
     }
     private void ChangeSpeed(InputAction.CallbackContext context)
     {
-        _moveSpeed += (float)(context.ReadValue<Single>() * SpeedChangeLimiter(_speedChangeModifier/120f));  
+        _moveSpeed += (float)(context.ReadValue<Single>() * SpeedChangeLimiter(_speedChangeModifier)/120f);  
     }
 
 
