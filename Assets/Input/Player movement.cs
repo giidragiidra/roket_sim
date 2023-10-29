@@ -10,7 +10,6 @@ public class Playermovement : MonoBehaviour
 
     [SerializeField] private float _moveSpeed;
     [SerializeField] private Single _speedChangeModifier;
-
     [SerializeField] private Single _maxChangeValue;
 
     [SerializeField] private float _fuelLeft;
@@ -35,6 +34,7 @@ public class Playermovement : MonoBehaviour
 
     private void Update()
     {
+        _moveSpeed = SpeedChangeLimiter(_moveSpeed);
         MovePlayer();
     }
 
@@ -44,15 +44,16 @@ public class Playermovement : MonoBehaviour
         {
             _rb.AddForce(transform.right * _moveSpeed * -10f, ForceMode.Force);
         }    
-        
     }
 
     private float SpeedChangeLimiter(Single speed)
-        => Mathf.Clamp(speed, -_maxChangeValue, _maxChangeValue);
-
+    {
+        return Mathf.Clamp(speed, 0f, _maxChangeValue);
+    }
+    
     private void SetMove(InputAction.CallbackContext context)
         => _isStarted = true;
 
     private void ChangeSpeed(InputAction.CallbackContext context)
-        => _moveSpeed += (float)(context.ReadValue<Single>() * SpeedChangeLimiter(_speedChangeModifier)/120f);  
+        => _moveSpeed += (float)(context.ReadValue<Single>() * (_speedChangeModifier/120f));  
 }
