@@ -625,7 +625,7 @@ Rigidbody:
   m_GameObject: {fileID: 1195708528}
   serializedVersion: 4
   m_Mass: 10
-  m_Drag: 5
+  m_Drag: 0.5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -656,10 +656,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 10
-  _speedChangeModifier: 10
-  _maxChangeValue: 200
-  _fuelLeft: 0
-  _fuelWaste: 0
+  _speedChangeModifier: 5
+  _maxChangeValue: 20
+  _fuelAmount: 10
+  _fuelWaste: 2
 --- !u!1 &1506983838
 GameObject:
   m_ObjectHideFlags: 0

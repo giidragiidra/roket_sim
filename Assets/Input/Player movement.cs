@@ -12,7 +12,7 @@ public class Playermovement : MonoBehaviour
     [SerializeField] private Single _speedChangeModifier;
     [SerializeField] private Single _maxChangeValue;
 
-    [SerializeField] private float _fuelLeft;
+    [SerializeField] private float _fuelAmount;
     [SerializeField] private float _fuelWaste;
 
     private bool _abilityToFly = true;
@@ -20,7 +20,6 @@ public class Playermovement : MonoBehaviour
     private Rigidbody _rb;
     private bool _isStarted = false;
     private ControlMap _controls;
-    private Vector3 _moveVector;
 
     private void Start()
     {
@@ -29,6 +28,7 @@ public class Playermovement : MonoBehaviour
         _controls = new ControlMap();
         _controls.InGame.speedscale.performed += ChangeSpeed;
         _controls.InGame.move.performed += SetMove;
+        _controls.InGame.dash.performed += Dash;
         _controls.Enable();
     }
 
@@ -40,12 +40,22 @@ public class Playermovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        if(_abilityToFly & _isStarted)
+        if((_abilityToFly & _isStarted) & _fuelAmount > 0f)
         {
             _rb.AddForce(transform.right * _moveSpeed * -10f, ForceMode.Force);
+            FuelWasting();
         }    
     }
 
+    private void Dash(InputAction.CallbackContext context)
+    {
+
+    }
+    private void FuelWasting()
+    {
+        _fuelAmount -= Time.deltaTime * _fuelWaste;
+    }
+    
     private float SpeedChangeLimiter(Single speed)
     {
         return Mathf.Clamp(speed, 0f, _maxChangeValue);

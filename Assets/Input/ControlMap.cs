@@ -44,6 +44,15 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""206dfae3-294f-4fb7-93e2-0f6bb90422dd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -83,11 +92,55 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b4535740-19c7-4473-a028-a5902633ee38"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""52d3471b-efc6-40f3-aa1d-26c816b3e9b7"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4881b45a-ff9a-4829-8abe-ea709d425bff"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89d008ab-d0fa-4f25-9df4-7e6ec0a6bd01"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03061c74-6a40-41b8-832d-3d4f56c92b40"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -117,6 +170,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_InGame = asset.FindActionMap("InGame", throwIfNotFound: true);
         m_InGame_move = m_InGame.FindAction("move", throwIfNotFound: true);
         m_InGame_speedscale = m_InGame.FindAction("speedscale", throwIfNotFound: true);
+        m_InGame_dash = m_InGame.FindAction("dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -180,12 +234,14 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private List<IInGameActions> m_InGameActionsCallbackInterfaces = new List<IInGameActions>();
     private readonly InputAction m_InGame_move;
     private readonly InputAction m_InGame_speedscale;
+    private readonly InputAction m_InGame_dash;
     public struct InGameActions
     {
         private @ControlMap m_Wrapper;
         public InGameActions(@ControlMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @move => m_Wrapper.m_InGame_move;
         public InputAction @speedscale => m_Wrapper.m_InGame_speedscale;
+        public InputAction @dash => m_Wrapper.m_InGame_dash;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -201,6 +257,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @speedscale.started += instance.OnSpeedscale;
             @speedscale.performed += instance.OnSpeedscale;
             @speedscale.canceled += instance.OnSpeedscale;
+            @dash.started += instance.OnDash;
+            @dash.performed += instance.OnDash;
+            @dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IInGameActions instance)
@@ -211,6 +270,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @speedscale.started -= instance.OnSpeedscale;
             @speedscale.performed -= instance.OnSpeedscale;
             @speedscale.canceled -= instance.OnSpeedscale;
+            @dash.started -= instance.OnDash;
+            @dash.performed -= instance.OnDash;
+            @dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IInGameActions instance)
@@ -241,5 +303,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnSpeedscale(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
