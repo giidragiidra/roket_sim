@@ -83,7 +83,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b4535740-19c7-4473-a028-a5902633ee38"",
-                    ""path"": ""<Keyboard>/#(W)"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

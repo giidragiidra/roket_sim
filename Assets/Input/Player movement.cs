@@ -13,10 +13,13 @@ public class Playermovement : MonoBehaviour
 
     [SerializeField] private Single _maxChangeValue;
 
-    //[SerializeField] private Transform _orientation;
+    [SerializeField] private float _fuelLeft;
+    [SerializeField] private float _fuelWaste;
+
+    private bool _abilityToFly = true;
     
     private Rigidbody _rb;
-
+    private bool _isStarted = false;
     private ControlMap _controls;
     private Vector3 _moveVector;
 
@@ -26,34 +29,30 @@ public class Playermovement : MonoBehaviour
         _rb.freezeRotation = true;
         _controls = new ControlMap();
         _controls.InGame.speedscale.performed += ChangeSpeed;
+        _controls.InGame.move.performed += SetMove;
         _controls.Enable();
     }
 
-    void Update()
+    private void Update()
     {
-        GetInput();
         MovePlayer();
     }
-    private void GetInput()
-    {
-        var inputVector = Vector2.left * _controls.InGame.move.ReadValue<float>();
-        
-        _moveVector = transform.forward * inputVector.y + transform.right * inputVector.x;
-    }
+
     private void MovePlayer()
     {
-        _rb.AddForce(_moveVector.normalized * _moveSpeed * 10f, ForceMode.Force);
+        if(_abilityToFly & _isStarted)
+        {
+            _rb.AddForce(transform.right * _moveSpeed * -10f, ForceMode.Force);
+        }    
+        
     }
+
     private float SpeedChangeLimiter(Single speed)
-    {
-        if (speed > _speedChangeModifier)
-            return speed = _speedChangeModifier;
-        return speed;
-    }
+        => Mathf.Clamp(speed, -_maxChangeValue, _maxChangeValue);
+
+    private void SetMove(InputAction.CallbackContext context)
+        => _isStarted = true;
+
     private void ChangeSpeed(InputAction.CallbackContext context)
-    {
-        _moveSpeed += (float)(context.ReadValue<Single>() * SpeedChangeLimiter(_speedChangeModifier)/120f);  
-    }
-
-
+        => _moveSpeed += (float)(context.ReadValue<Single>() * SpeedChangeLimiter(_speedChangeModifier)/120f);  
 }
