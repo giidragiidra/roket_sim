@@ -15,8 +15,12 @@ public class Playermovement : MonoBehaviour
     [SerializeField] private float _fuelAmount;
     [SerializeField] private float _fuelWaste;
 
-    private bool _abilityToFly = true;
+    [SerializeField] private float _dashCooldown;
+    [SerializeField] private float _dashForse;
     
+    private bool _ableToDash = true;
+
+    private bool _ableToFly = true;
     private Rigidbody _rb;
     private bool _isStarted = false;
     private ControlMap _controls;
@@ -40,7 +44,7 @@ public class Playermovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        if((_abilityToFly & _isStarted) & _fuelAmount > 0f)
+        if((_ableToFly & _isStarted) & _fuelAmount > 0f)
         {
             _rb.AddForce(transform.right * _moveSpeed * -10f, ForceMode.Force);
             FuelWasting();
@@ -49,11 +53,24 @@ public class Playermovement : MonoBehaviour
 
     private void Dash(InputAction.CallbackContext context)
     {
+        if (!_ableToFly || !_ableToDash)
+            return;
 
+        _ableToDash = false;
+        //_rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
+
+        _rb.AddForce(transform.up * _dashForse, ForceMode.Impulse);
+        Invoke(nameof(ResetDash), _dashCooldown);
     }
+    
+    private void ResetDash()
+    {
+        _ableToDash = true;
+    }
+    
     private void FuelWasting()
     {
-        _fuelAmount -= Time.deltaTime * _fuelWaste;
+        _fuelAmount -= Time.deltaTime * _fuelWaste * _moveSpeed;
     }
     
     private float SpeedChangeLimiter(Single speed)

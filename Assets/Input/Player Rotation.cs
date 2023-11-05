@@ -1,36 +1,60 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class CameraRotarion : MonoBehaviour
 {
     [SerializeField] private float sensX = 1;
     [SerializeField] private float sensY = 1;
+    [SerializeField] private float sensZ = 1;
     
     [SerializeField] private float startRotx;
     [SerializeField] private float startRoty;
     [SerializeField] private float startRotz;
 
-    private float xRotation;
-    private float zRotation;
+    private float _xRotation;
+    private float _zRotation;
+    private float _yRotation;
+    
+    private Quaternion _rotation;
 
-    void Start()
+    private ControlMap _controls;
+
+
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        xRotation = startRotx;
-        zRotation = startRotz;
+        _xRotation = startRotx;
+        _yRotation = startRoty;
+        _zRotation = startRotz;
+        _controls = new ControlMap();
+        _controls.Enable();
+        
     }
 
 
-    void Update()
+    private void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
-
-        xRotation += mouseX;
-        zRotation -= mouseY;
-
-        transform.rotation = Quaternion.Euler(0,xRotation,zRotation);
+        MouseRotate();
     }
+
+    private void MouseRotate()
+    { 
+        var currentRotation = transform.rotation.eulerAngles;
+
+        Vector2 mouseShift = _controls.InGame.mouse.ReadValue<Vector2>() * 0.001f;
+        mouseShift.x *= sensX;
+        mouseShift.y *= sensY;
+        float zaxisrot = (float)_controls.InGame.zaxisrot.ReadValue<Single>() * 0.001f * sensZ;
+        
+        currentRotation += new Vector3(zaxisrot, mouseShift.x, -mouseShift.y);
+        
+        transform.rotation = Quaternion.Euler(currentRotation);
+    
+    }
+
 }

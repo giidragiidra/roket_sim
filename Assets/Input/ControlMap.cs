@@ -47,8 +47,26 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""dash"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""206dfae3-294f-4fb7-93e2-0f6bb90422dd"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""mouse"",
+                    ""type"": ""Value"",
+                    ""id"": ""2309dd77-a248-4315-9971-030c8ff05f6c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""zaxisrot"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7d26a42-9092-4363-8198-a782ee068b84"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -101,48 +119,147 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""52d3471b-efc6-40f3-aa1d-26c816b3e9b7"",
+                    ""name"": ""3D Vector"",
+                    ""id"": ""322ae291-4179-4880-9dc4-8567a061f110"",
+                    ""path"": ""3DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""dash"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""f066eee3-82e6-44e1-9f1d-640ecea0be08"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""dash"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""4881b45a-ff9a-4829-8abe-ea709d425bff"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""89d008ab-d0fa-4f25-9df4-7e6ec0a6bd01"",
+                    ""name"": ""down"",
+                    ""id"": ""35dce6be-2250-4f8b-8060-7d0a7df6a566"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""dash"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""03061c74-6a40-41b8-832d-3d4f56c92b40"",
+                    ""name"": ""forward"",
+                    ""id"": ""162c2376-d043-41bf-802e-4ce64a7cb28d"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""dash"",
                     ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""backward"",
+                    ""id"": ""5bc272af-5760-497f-a3c6-b47453dc31ac"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""39206e90-a717-4bc9-9fb3-49af257dc721"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""mouse"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""d8b89c36-b984-432e-aca5-8ea33ddec112"",
+                    ""path"": ""<Mouse>/delta/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""24843d8b-5156-4674-bac2-38270027a952"",
+                    ""path"": ""<Mouse>/delta/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""05193f6a-7d19-494c-97b7-2668cae31373"",
+                    ""path"": ""<Mouse>/delta/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""cf28f447-cbd0-46cd-a0fb-9c723a7eda56"",
+                    ""path"": ""<Mouse>/delta/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""b031ca0a-ce2c-4e33-8faf-00d2324425d1"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""zaxisrot"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""2776a6ca-9a52-41f8-82be-84efbf1890a6"",
+                    ""path"": ""<Mouse>/backButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""zaxisrot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""9f42c5ab-d39d-4cea-abe3-797ae5261a25"",
+                    ""path"": ""<Mouse>/forwardButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""zaxisrot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -171,6 +288,8 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_InGame_move = m_InGame.FindAction("move", throwIfNotFound: true);
         m_InGame_speedscale = m_InGame.FindAction("speedscale", throwIfNotFound: true);
         m_InGame_dash = m_InGame.FindAction("dash", throwIfNotFound: true);
+        m_InGame_mouse = m_InGame.FindAction("mouse", throwIfNotFound: true);
+        m_InGame_zaxisrot = m_InGame.FindAction("zaxisrot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -235,6 +354,8 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_InGame_move;
     private readonly InputAction m_InGame_speedscale;
     private readonly InputAction m_InGame_dash;
+    private readonly InputAction m_InGame_mouse;
+    private readonly InputAction m_InGame_zaxisrot;
     public struct InGameActions
     {
         private @ControlMap m_Wrapper;
@@ -242,6 +363,8 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         public InputAction @move => m_Wrapper.m_InGame_move;
         public InputAction @speedscale => m_Wrapper.m_InGame_speedscale;
         public InputAction @dash => m_Wrapper.m_InGame_dash;
+        public InputAction @mouse => m_Wrapper.m_InGame_mouse;
+        public InputAction @zaxisrot => m_Wrapper.m_InGame_zaxisrot;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -260,6 +383,12 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @dash.started += instance.OnDash;
             @dash.performed += instance.OnDash;
             @dash.canceled += instance.OnDash;
+            @mouse.started += instance.OnMouse;
+            @mouse.performed += instance.OnMouse;
+            @mouse.canceled += instance.OnMouse;
+            @zaxisrot.started += instance.OnZaxisrot;
+            @zaxisrot.performed += instance.OnZaxisrot;
+            @zaxisrot.canceled += instance.OnZaxisrot;
         }
 
         private void UnregisterCallbacks(IInGameActions instance)
@@ -273,6 +402,12 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @dash.started -= instance.OnDash;
             @dash.performed -= instance.OnDash;
             @dash.canceled -= instance.OnDash;
+            @mouse.started -= instance.OnMouse;
+            @mouse.performed -= instance.OnMouse;
+            @mouse.canceled -= instance.OnMouse;
+            @zaxisrot.started -= instance.OnZaxisrot;
+            @zaxisrot.performed -= instance.OnZaxisrot;
+            @zaxisrot.canceled -= instance.OnZaxisrot;
         }
 
         public void RemoveCallbacks(IInGameActions instance)
@@ -304,5 +439,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnSpeedscale(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnMouse(InputAction.CallbackContext context);
+        void OnZaxisrot(InputAction.CallbackContext context);
     }
 }
