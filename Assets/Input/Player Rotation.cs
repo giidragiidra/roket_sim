@@ -9,7 +9,6 @@ public class CameraRotarion : MonoBehaviour
 {
     [SerializeField] private float sensX = 1;
     [SerializeField] private float sensY = 1;
-    [SerializeField] private float sensZ = 1;
     
     [SerializeField] private float startRotx;
     [SerializeField] private float startRoty;
@@ -49,9 +48,8 @@ public class CameraRotarion : MonoBehaviour
         Vector2 mouseShift = _controls.InGame.mouse.ReadValue<Vector2>() * 0.001f;
         mouseShift.x *= sensX;
         mouseShift.y *= sensY;
-        float zaxisrot = (float)_controls.InGame.zaxisrot.ReadValue<Single>() * 0.001f * sensZ;
         
-        currentRotation += new Vector3(zaxisrot, mouseShift.x, -mouseShift.y);
+        currentRotation += new Vector3(0, mouseShift.x, -mouseShift.y);
         
         transform.rotation = Quaternion.Euler(currentRotation);
     

@@ -49,7 +49,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""name"": ""dash"",
                     ""type"": ""Value"",
                     ""id"": ""206dfae3-294f-4fb7-93e2-0f6bb90422dd"",
-                    ""expectedControlType"": ""Vector3"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -62,15 +62,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""zaxisrot"",
-                    ""type"": ""Button"",
-                    ""id"": ""f7d26a42-9092-4363-8198-a782ee068b84"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -119,9 +110,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""3D Vector"",
+                    ""name"": ""2D Vector"",
                     ""id"": ""322ae291-4179-4880-9dc4-8567a061f110"",
-                    ""path"": ""3DVector"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -130,7 +121,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
+                    ""name"": ""Up"",
                     ""id"": ""f066eee3-82e6-44e1-9f1d-640ecea0be08"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
@@ -141,7 +132,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""down"",
+                    ""name"": ""Down"",
                     ""id"": ""35dce6be-2250-4f8b-8060-7d0a7df6a566"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
@@ -152,7 +143,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""forward"",
+                    ""name"": ""Left"",
                     ""id"": ""162c2376-d043-41bf-802e-4ce64a7cb28d"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
@@ -163,7 +154,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""backward"",
+                    ""name"": ""Right"",
                     ""id"": ""5bc272af-5760-497f-a3c6-b47453dc31ac"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
@@ -227,39 +218,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""action"": ""mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""b031ca0a-ce2c-4e33-8faf-00d2324425d1"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""zaxisrot"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""2776a6ca-9a52-41f8-82be-84efbf1890a6"",
-                    ""path"": ""<Mouse>/backButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""zaxisrot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""9f42c5ab-d39d-4cea-abe3-797ae5261a25"",
-                    ""path"": ""<Mouse>/forwardButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""zaxisrot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -289,7 +247,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_InGame_speedscale = m_InGame.FindAction("speedscale", throwIfNotFound: true);
         m_InGame_dash = m_InGame.FindAction("dash", throwIfNotFound: true);
         m_InGame_mouse = m_InGame.FindAction("mouse", throwIfNotFound: true);
-        m_InGame_zaxisrot = m_InGame.FindAction("zaxisrot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -355,7 +312,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_InGame_speedscale;
     private readonly InputAction m_InGame_dash;
     private readonly InputAction m_InGame_mouse;
-    private readonly InputAction m_InGame_zaxisrot;
     public struct InGameActions
     {
         private @ControlMap m_Wrapper;
@@ -364,7 +320,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         public InputAction @speedscale => m_Wrapper.m_InGame_speedscale;
         public InputAction @dash => m_Wrapper.m_InGame_dash;
         public InputAction @mouse => m_Wrapper.m_InGame_mouse;
-        public InputAction @zaxisrot => m_Wrapper.m_InGame_zaxisrot;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -386,9 +341,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @mouse.started += instance.OnMouse;
             @mouse.performed += instance.OnMouse;
             @mouse.canceled += instance.OnMouse;
-            @zaxisrot.started += instance.OnZaxisrot;
-            @zaxisrot.performed += instance.OnZaxisrot;
-            @zaxisrot.canceled += instance.OnZaxisrot;
         }
 
         private void UnregisterCallbacks(IInGameActions instance)
@@ -405,9 +357,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @mouse.started -= instance.OnMouse;
             @mouse.performed -= instance.OnMouse;
             @mouse.canceled -= instance.OnMouse;
-            @zaxisrot.started -= instance.OnZaxisrot;
-            @zaxisrot.performed -= instance.OnZaxisrot;
-            @zaxisrot.canceled -= instance.OnZaxisrot;
         }
 
         public void RemoveCallbacks(IInGameActions instance)
@@ -440,6 +389,5 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnSpeedscale(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnMouse(InputAction.CallbackContext context);
-        void OnZaxisrot(InputAction.CallbackContext context);
     }
 }
